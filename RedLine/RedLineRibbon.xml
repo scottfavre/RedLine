@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load">
+  <ribbon>
+    <tabs>
+      <tab id="tabRedLine" label="RedLine">
+        <group id="grpScan"
+               label="Scan">
+          <button id="btnStartScan"
+                  label="Start Scan"
+                  getImage="GetButtonImage"
+                  onAction="OnStartScanClicked"
+                  size="large"/>
+          <checkBox id="cbShowPanel"
+                    label="Show Panel"
+                    getPressed="GetShowPanelChecked"
+                    onAction="ShowPanelChecked"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>
+
