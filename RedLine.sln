@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedLine", "RedLine.csproj", "{7FF4829A-107D-4088-A174-AA89673E598C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedLine", "RedLine\RedLine.csproj", "{7FF4829A-107D-4088-A174-AA89673E598C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
