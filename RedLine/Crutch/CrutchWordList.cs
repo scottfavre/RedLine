@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 
 namespace RedLine.Crutch
 {
@@ -16,5 +17,13 @@ namespace RedLine.Crutch
 
         public string Name;
         public HashSet<string> Crutches;
+
+        internal string Key
+        {
+            get
+            {
+                return Name.ToLower(CultureInfo.CurrentCulture);
+            }
+        }
     }
 }

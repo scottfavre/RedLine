@@ -11,8 +11,9 @@ namespace RedLine.Crutch
 {
     public interface ICrutchWordService
     {
+        string CurrentList { get; }
         IEnumerable<string> CrutchWords { get; }
-        IEnumerable<string> SetNames { get; }
+        IEnumerable<string> ListNames { get; }
 
         void AddWord(string word);
         void RemoveWord(string word);
@@ -60,14 +61,22 @@ namespace RedLine.Crutch
             else
             {
                 _currentList = new CrutchWordList("Default");
-                _currentList.Crutches.Add("saw");
-                _currentList.Crutches.Add("began");
-                _currentList.Crutches.Add("started");
-                _currentList.Crutches.Add("thought");
+
+                InitNewList(_currentList);
             }
 
             _loading = false;
             _loadComplete.Set();
+        }
+        
+        public string CurrentList
+        {
+            get
+            {
+                WaitForLoad();
+
+                return _currentList.Name;
+            }
         }
 
         public IEnumerable<string> CrutchWords
@@ -83,13 +92,15 @@ namespace RedLine.Crutch
             }
         }
 
-        public IEnumerable<string> SetNames
+        public IEnumerable<string> ListNames
         {
             get
             {
                 WaitForLoad();
 
-                return _lists.Keys.OrderBy(name => name);
+                return _lists.Values
+                    .Select(list => list.Name)
+                    .OrderBy(name => name);
             }
         }
 
@@ -144,17 +155,23 @@ namespace RedLine.Crutch
                 return;
             }
 
-            _currentList = new CrutchWordList(name);
-            _currentList.Crutches.Add("saw");
-            _currentList.Crutches.Add("began");
-            _currentList.Crutches.Add("started");
-            _currentList.Crutches.Add("thought");
+            _currentList = new CrutchWordList(name); 
+            InitNewList(_currentList);
 
             _lists[key] = _currentList;
 
             CrutchData.Create(_currentList);
 
             RaiseCurrentListUpdated();
+        }
+
+        private void InitNewList(CrutchWordList list)
+        {
+            list.Crutches.Add("saw");
+            list.Crutches.Add("began");
+            list.Crutches.Add("started");
+            list.Crutches.Add("thought");
+            _lists[list.Key] = list;
         }
 
         public void DeleteCrutchList(string name)

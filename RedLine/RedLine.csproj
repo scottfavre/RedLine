@@ -177,6 +177,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\ManageCrutchListsDialog.resx">
+      <DependentUpon>ManageCrutchListsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ScannerTaskPanel.resx">
       <DependentUpon>ScannerTaskPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +193,12 @@
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCrutchListsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ManageCrutchListsDialog.Designer.cs">
+      <DependentUpon>ManageCrutchListsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="View\RedLineRibbon.cs" />
     <Compile Include="Scanners\AdverbScanner.cs" />

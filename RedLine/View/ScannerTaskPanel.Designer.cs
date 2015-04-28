@@ -34,6 +34,8 @@
             this.lbCrutches = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnRemoveCrutch = new System.Windows.Forms.Button();
+            this.labelCurrentList = new System.Windows.Forms.Label();
+            this.btnManageLists = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // clbScanners
@@ -101,10 +103,32 @@
             this.btnRemoveCrutch.UseVisualStyleBackColor = true;
             this.btnRemoveCrutch.Click += new System.EventHandler(this.btnRemoveCrutch_Click);
             // 
+            // labelCurrentList
+            // 
+            this.labelCurrentList.AutoSize = true;
+            this.labelCurrentList.Location = new System.Drawing.Point(61, 137);
+            this.labelCurrentList.Name = "labelCurrentList";
+            this.labelCurrentList.Size = new System.Drawing.Size(35, 13);
+            this.labelCurrentList.TabIndex = 6;
+            this.labelCurrentList.Text = "label2";
+            // 
+            // btnManageLists
+            // 
+            this.btnManageLists.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnManageLists.Location = new System.Drawing.Point(205, 132);
+            this.btnManageLists.Name = "btnManageLists";
+            this.btnManageLists.Size = new System.Drawing.Size(23, 23);
+            this.btnManageLists.TabIndex = 7;
+            this.btnManageLists.Text = "...";
+            this.btnManageLists.UseVisualStyleBackColor = true;
+            this.btnManageLists.Click += new System.EventHandler(this.btnManageLists_Click);
+            // 
             // ScannerTaskPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnManageLists);
+            this.Controls.Add(this.labelCurrentList);
             this.Controls.Add(this.btnRemoveCrutch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbCrutches);
@@ -126,5 +150,7 @@
         private System.Windows.Forms.ListBox lbCrutches;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRemoveCrutch;
+        private System.Windows.Forms.Label labelCurrentList;
+        private System.Windows.Forms.Button btnManageLists;
     }
 }

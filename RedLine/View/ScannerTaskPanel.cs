@@ -51,6 +51,8 @@ namespace RedLine.View
                 lbCrutches.SelectedIndex = selectedIndex - 1;
             else
                 lbCrutches.SelectedIndex = selectedIndex;
+
+            labelCurrentList.Text = CrutchService.CurrentList;
         }
 
         void clbScanners_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -100,6 +102,23 @@ namespace RedLine.View
             if (word == null) return;
 
             CrutchService.RemoveWord(word);
+        }
+
+        private void btnManageLists_Click(object sender, EventArgs e)
+        {
+            var form = new ManageCrutchListsDialog();
+            form.SetLists(CrutchService.CurrentList, CrutchService.ListNames);
+            if(form.ShowDialog() == DialogResult.OK)
+            {
+                if(form.CreateNew)
+                {
+                    CrutchService.CreateCrutchList(form.SelectedList);
+                }
+                else
+                {
+                    CrutchService.SetCrutchList(form.SelectedList);
+                }
+            }
         }
     }
 }
