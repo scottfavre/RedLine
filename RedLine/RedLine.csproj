@@ -112,6 +112,7 @@
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -157,6 +158,11 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Crutch\CrutchFileSerializer.cs" />
+    <Compile Include="Crutch\CrutchWordDataStore.cs" />
+    <Compile Include="Crutch\CrutchWordList.cs" />
+    <Compile Include="Crutch\CrutchWordService.cs" />
+    <Compile Include="FileSystemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </Compile>
     <EmbeddedResource Include="ScannerTaskPanel.resx">
       <DependentUpon>ScannerTaskPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Crutch\CrutchList_1_0.xsd">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -222,7 +231,7 @@
     <ManifestKeyFile>RedLine_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>127018F8D6DB6D781517F3D7790F07603DC11BEA</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>084A13AD6CC289972576D84C41EAE854CB50E8A7</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

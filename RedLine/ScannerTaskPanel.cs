@@ -1,33 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using RedLine.Crutch;
 using RedLine.Scanners;
+using System;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace RedLine
 {
-    public partial class ScannerTaskPanel : UserControl
+    public partial class ScannerTaskPanel : UserControl, IPartImportsSatisfiedNotification
     {
-        private IScannerService _scannerService;
-        private ICrutchWordService _crutchService;
-
         private ScanResults _results;
         private IScanner[] _scanners;
+
+        [Import]
+        public IScannerService ScannerService { private get; set; }
+
+        [Import]
+        public ICrutchWordService CrutchService { private get; set; }
         
-        public ScannerTaskPanel(IScannerService scannerService, ICrutchWordService crutchService)
+        public ScannerTaskPanel()
         {
             InitializeComponent();
+        }
 
-            _scannerService = scannerService;
-            _crutchService = crutchService;
+        public void OnImportsSatisfied()
+        {
+            LoadCrutchWords();
 
-            lbCrutches.DataSource = crutchService.Crutches;
-
-            _scanners = scannerService.Scanners.ToArray();
+            _scanners = ScannerService.Scanners.ToArray();
 
             for (int idx = 0; idx < _scanners.Length; idx++)
             {
@@ -35,6 +35,13 @@ namespace RedLine
                 clbScanners.SetItemChecked(idx, _scanners[idx].Enabled);
                 clbScanners.ItemCheck += clbScanners_ItemCheck;
             }
+        }
+
+        private void LoadCrutchWords()
+        {
+            var crutches = CrutchService.CrutchWords.ToArray();
+
+            lbCrutches.DataSource = crutches;
         }
 
         void clbScanners_ItemCheck(object sender, ItemCheckEventArgs e)

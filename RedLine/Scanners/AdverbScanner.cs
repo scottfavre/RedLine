@@ -1,11 +1,10 @@
 ﻿using Microsoft.Office.Interop.Word;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.Composition;
 
 namespace RedLine.Scanners
 {
+    [Export(typeof(IScanner))]
     public class AdverbScanner: IScanner
     {
         public AdverbScanner()

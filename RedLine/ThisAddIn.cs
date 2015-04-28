@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using Word = Microsoft.Office.Interop.Word;
-using Office = Microsoft.Office.Core;
-using Microsoft.Office.Tools.Word;
+﻿using Microsoft.Office.Tools;
 using RedLine.Scanners;
-using Microsoft.Office.Tools;
+using System;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using Office = Microsoft.Office.Core;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace RedLine
 {
@@ -21,12 +18,14 @@ namespace RedLine
     public partial class ThisAddIn: IPanelVisiblity
     {
         private RedLineRibbon _ribbon;
-        private AdverbScanner _adverbScanner;
-        private CrutchScanner _crutchScanner;
-        private ScannerService _scannerService;
 
         private ScannerTaskPanel _scannerPanel;
         private CustomTaskPane _scannerContainer;
+
+        private CompositionContainer _container;
+
+        [Import]
+        public IScannerService ScannerService { private get; set; }
 
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
@@ -36,18 +35,13 @@ namespace RedLine
             return _ribbon;
         }
 
-        void OnRibbon_StartScan(object sender, EventArgs e)
-        {
-            var results = _scannerService.StartScan(Application.ActiveDocument);
-
-            _scannerPanel.SetResults(results);
-        }
-
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            _adverbScanner = new AdverbScanner();
-            _crutchScanner = new CrutchScanner();
-            _scannerService = new ScannerService(_adverbScanner, _crutchScanner);
+            var catalog = new AggregateCatalog(
+                new AssemblyCatalog(typeof(ThisAddIn).Assembly));
+            _container = new CompositionContainer(catalog);
+
+            _container.ComposeParts(this);
 
             Application.DocumentOpen += Application_DocumentOpen;
 
@@ -59,6 +53,13 @@ namespace RedLine
             CreateScannerPanel();
         }
 
+        void OnRibbon_StartScan(object sender, EventArgs e)
+        {
+            var results = ScannerService.StartScan(Application.ActiveDocument);
+
+            _scannerPanel.SetResults(results);
+        }
+
         private void CreateScannerPanel()
         {
             bool visible = false;
@@ -68,7 +69,9 @@ namespace RedLine
                 visible = _scannerContainer.Visible;
             }
 
-            _scannerPanel = new ScannerTaskPanel(_scannerService, _crutchScanner);
+            _scannerPanel = new ScannerTaskPanel();
+            _container.ComposeParts(_scannerPanel);
+
             _scannerContainer = CustomTaskPanes.Add(_scannerPanel, "RedLine");
             _scannerContainer.Visible = visible;
         }

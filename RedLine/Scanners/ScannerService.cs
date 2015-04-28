@@ -1,6 +1,7 @@
 ﻿using Microsoft.Office.Interop.Word;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 
@@ -13,13 +14,21 @@ namespace RedLine.Scanners
         ScanResults StartScan(Document document);
     }
 
-    public class ScannerService : IScannerService
+    [Export(typeof(IScannerService))]
+    public class ScannerService : IScannerService, IPartImportsSatisfiedNotification
     {
         private IScanner[] _scanners;
 
-        public ScannerService(params IScanner[] scanners)
+        [ImportMany]
+        public IEnumerable<IScanner> ScannerImport { get; set; }
+
+        public ScannerService()
         {
-            _scanners = scanners;
+        }
+
+        public void OnImportsSatisfied()
+        {
+            _scanners = ScannerImport.ToArray();
         }
 
         public IEnumerable<IScanner> Scanners

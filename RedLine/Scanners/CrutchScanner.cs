@@ -1,17 +1,15 @@
-﻿using System;
+﻿using RedLine.Crutch;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.ComponentModel.Composition;
 
 namespace RedLine.Scanners
 {
-    public interface ICrutchWordService
+    [Export(typeof(IScanner))]
+    public class CrutchScanner : IScanner
     {
-        string[] Crutches { get; }
-    }
+        [Import]
+        public ICrutchWordService CrutchService { private get; set; }
 
-    public class CrutchScanner : IScanner, ICrutchWordService
-    {
         public CrutchScanner()
         {
             Enabled = true;
@@ -22,23 +20,10 @@ namespace RedLine.Scanners
             get { return "Crutch Words"; }
         }
 
-        private string[] _patterns = new[] {
-            "started",
-            "began",
-            "saw",
-            "thought"            
-        };
-
         public IEnumerable<string> Patterns
         {
-            get { return _patterns; }
+            get { return CrutchService.CrutchWords; }
         }
-
-        public string[] Crutches
-        {
-            get { return _patterns; }
-        }
-
 
         public bool Enabled { get; set; }
 
@@ -46,6 +31,5 @@ namespace RedLine.Scanners
         {
             find.MatchWholeWord = true;
         }
-
     }
 }
