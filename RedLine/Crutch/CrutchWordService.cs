@@ -35,6 +35,9 @@ namespace RedLine.Crutch
         [Import]
         public ICrutchWordDataStore CrutchData { private get; set; }
 
+        [Import]
+        public ISettingsService Settings { private get; set; }
+
         public CrutchWordService()
         {
             _lists = new Dictionary<string, CrutchWordList>();
@@ -57,7 +60,16 @@ namespace RedLine.Crutch
             }
 
             if (_lists.Any())
-                _currentList = _lists.First().Value;
+            {
+                if (String.IsNullOrWhiteSpace(Settings.LastCrutchListKey) ||
+                    !_lists.TryGetValue(Settings.LastCrutchListKey, out _currentList))
+                {
+                    if (!_lists.TryGetValue("default", out _currentList))
+                    {
+                        _currentList = _lists.First().Value;
+                    }
+                }
+            }
             else
             {
                 _currentList = new CrutchWordList("Default");
@@ -67,6 +79,7 @@ namespace RedLine.Crutch
 
             _loading = false;
             _loadComplete.Set();
+            Settings.LastCrutchListKey = _currentList.Key;
         }
         
         public string CurrentList
@@ -137,7 +150,7 @@ namespace RedLine.Crutch
             if (_lists.TryGetValue(name.ToLower(CultureInfo.CurrentCulture), out list))
             {
                 _currentList = list;
-
+                Settings.LastCrutchListKey = list.Key;
                 RaiseCurrentListUpdated();
             }
         }
@@ -162,6 +175,7 @@ namespace RedLine.Crutch
 
             CrutchData.Create(_currentList);
 
+            Settings.LastCrutchListKey = _currentList.Key;
             RaiseCurrentListUpdated();
         }
 
@@ -197,6 +211,7 @@ namespace RedLine.Crutch
                 CreateCrutchList("Default");
             }
 
+            Settings.LastCrutchListKey = _currentList.Key;
             RaiseCurrentListUpdated();
         }
 

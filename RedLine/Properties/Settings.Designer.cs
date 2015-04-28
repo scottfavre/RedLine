@@ -22,5 +22,17 @@ namespace RedLine.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastCrutchList {
+            get {
+                return ((string)(this["LastCrutchList"]));
+            }
+            set {
+                this["LastCrutchList"] = value;
+            }
+        }
     }
 }
