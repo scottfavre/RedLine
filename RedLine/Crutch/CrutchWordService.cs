@@ -19,6 +19,8 @@ namespace RedLine.Crutch
         void SetCrutchList(string name);
         void CreateCrutchList(string name);
         void DeleteCrutchList(string name);
+
+        event EventHandler<EventArgs<CrutchWordList>> CurrentListUpdated;
     }
 
     [Export(typeof(ICrutchWordService))]
@@ -98,6 +100,8 @@ namespace RedLine.Crutch
             if(_currentList.Crutches.Add(word.ToLower(CultureInfo.CurrentCulture)))
             {
                 CrutchData.Update(_currentList);
+
+                RaiseCurrentListUpdated();
             }
         }
 
@@ -108,6 +112,8 @@ namespace RedLine.Crutch
             if (_currentList.Crutches.Remove(word.ToLower(CultureInfo.CurrentCulture)))
             {
                 CrutchData.Update(_currentList);
+
+                RaiseCurrentListUpdated();
             }
         }
 
@@ -120,6 +126,8 @@ namespace RedLine.Crutch
             if (_lists.TryGetValue(name.ToLower(CultureInfo.CurrentCulture), out list))
             {
                 _currentList = list;
+
+                RaiseCurrentListUpdated();
             }
         }
 
@@ -144,7 +152,9 @@ namespace RedLine.Crutch
 
             _lists[key] = _currentList;
 
-            CrutchData.Create(_currentList);            
+            CrutchData.Create(_currentList);
+
+            RaiseCurrentListUpdated();
         }
 
         public void DeleteCrutchList(string name)
@@ -169,6 +179,8 @@ namespace RedLine.Crutch
             {
                 CreateCrutchList("Default");
             }
+
+            RaiseCurrentListUpdated();
         }
 
         private void WaitForLoad()
@@ -177,6 +189,14 @@ namespace RedLine.Crutch
             {
                 _loadComplete.WaitOne();
             }
+        }
+
+        public event EventHandler<EventArgs<CrutchWordList>> CurrentListUpdated;
+        private void RaiseCurrentListUpdated()
+        {
+            var handler = CurrentListUpdated;
+            if (handler != null)
+                handler(this, new EventArgs<CrutchWordList>(_currentList));
         }
     }
 }

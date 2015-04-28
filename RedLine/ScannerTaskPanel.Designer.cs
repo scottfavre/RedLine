@@ -79,6 +79,7 @@
             this.lbCrutches.Name = "lbCrutches";
             this.lbCrutches.Size = new System.Drawing.Size(225, 108);
             this.lbCrutches.TabIndex = 3;
+            this.lbCrutches.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.lbCrutches_PreviewKeyDown);
             // 
             // label1
             // 

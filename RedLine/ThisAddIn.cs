@@ -1,4 +1,5 @@
 ﻿using Microsoft.Office.Tools;
+using RedLine.Crutch;
 using RedLine.Scanners;
 using System;
 using System.ComponentModel.Composition;
@@ -15,6 +16,7 @@ namespace RedLine
         event EventHandler VisibilityChanged;
     }
 
+    [Export(typeof(IPanelVisiblity))]
     public partial class ThisAddIn: IPanelVisiblity
     {
         private RedLineRibbon _ribbon;
@@ -27,10 +29,14 @@ namespace RedLine
         [Import]
         public IScannerService ScannerService { private get; set; }
 
+        [Import]
+        public ICrutchWordService CrutchService { private get; set; }
+
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
-            _ribbon = new RedLineRibbon(this);
+            _ribbon = new RedLineRibbon();
             _ribbon.StartScan += OnRibbon_StartScan;
+            _ribbon.AddCrutch += OnRibbon_AddCrutch;
 
             return _ribbon;
         }
@@ -41,11 +47,16 @@ namespace RedLine
                 new AssemblyCatalog(typeof(ThisAddIn).Assembly));
             _container = new CompositionContainer(catalog);
 
-            _container.ComposeParts(this);
+            _container.ComposeParts(this, _ribbon);
 
             Application.DocumentOpen += Application_DocumentOpen;
 
             CreateScannerPanel();
+        }
+
+        private void OnRibbon_AddCrutch(object sender, EventArgs<string> e)
+        {
+            CrutchService.AddWord(e.Data);
         }
 
         void Application_DocumentOpen(Word.Document Doc)

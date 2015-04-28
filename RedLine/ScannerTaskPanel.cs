@@ -25,6 +25,8 @@ namespace RedLine
 
         public void OnImportsSatisfied()
         {
+            CrutchService.CurrentListUpdated += (s, a) => LoadCrutchWords();
+
             LoadCrutchWords();
 
             _scanners = ScannerService.Scanners.ToArray();
@@ -41,7 +43,14 @@ namespace RedLine
         {
             var crutches = CrutchService.CrutchWords.ToArray();
 
+            var selectedIndex = lbCrutches.SelectedIndex;
+
             lbCrutches.DataSource = crutches;
+
+            if (selectedIndex > lbCrutches.Items.Count - 1)
+                lbCrutches.SelectedIndex = selectedIndex - 1;
+            else
+                lbCrutches.SelectedIndex = selectedIndex;
         }
 
         void clbScanners_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -70,6 +79,19 @@ namespace RedLine
         }
 
         private void btnRemoveCrutch_Click(object sender, EventArgs e)
+        {
+            DeleteCurrentCrutch();
+        }
+
+        private void lbCrutches_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                DeleteCurrentCrutch();
+            }
+        }
+
+        private void DeleteCurrentCrutch()
         {
             if (lbCrutches.SelectedIndex < 0) return;
 

@@ -162,6 +162,7 @@
     <Compile Include="Crutch\CrutchWordDataStore.cs" />
     <Compile Include="Crutch\CrutchWordList.cs" />
     <Compile Include="Crutch\CrutchWordService.cs" />
+    <Compile Include="EventArgs.cs" />
     <Compile Include="FileSystemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

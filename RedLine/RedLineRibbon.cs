@@ -1,6 +1,9 @@
-﻿using System;
+﻿using RedLine.Crutch;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -31,15 +34,20 @@ using Office = Microsoft.Office.Core;
 namespace RedLine
 {
     [ComVisible(true)]
-    public class RedLineRibbon : Office.IRibbonExtensibility
+    public class RedLineRibbon : Office.IRibbonExtensibility, IPartImportsSatisfiedNotification
     {
         private Office.IRibbonUI ribbon;
-        private IPanelVisiblity _panelVisibility;
 
-        public RedLineRibbon(IPanelVisiblity panelVisibility)
+        [Import]
+        public IPanelVisiblity PanelVisibility { private get; set; }
+
+        public RedLineRibbon()
         {
-            _panelVisibility = panelVisibility;
-            _panelVisibility.VisibilityChanged += (s, a) => ribbon.Invalidate();
+        }
+
+        public void OnImportsSatisfied()
+        {
+            PanelVisibility.VisibilityChanged += (s, a) => ribbon.Invalidate();
         }
 
         public event EventHandler StartScan;
@@ -48,6 +56,14 @@ namespace RedLine
             var handler = StartScan;
             if (handler != null)
                 handler(this, EventArgs.Empty);
+        }
+
+        public event EventHandler<EventArgs<string>> AddCrutch;
+        private void RaiseAddCrutch(string crutch)
+        {
+            var handler = AddCrutch;
+            if (handler != null)
+                handler(this, new EventArgs<string>(crutch));
         }
 
         #region IRibbonExtensibility Members
@@ -79,12 +95,34 @@ namespace RedLine
 
         public bool GetShowPanelChecked(Office.IRibbonControl control)
         {
-            return _panelVisibility.ScannerPanel;
+            return PanelVisibility.ScannerPanel;
         }
 
         public void ShowPanelChecked(Office.IRibbonControl control, bool isChecked)
         {
-            _panelVisibility.ScannerPanel = isChecked;
+            PanelVisibility.ScannerPanel = isChecked;
+        }
+
+
+        public bool CanAddCrutchWord(Office.IRibbonControl control)
+        {
+            var currentRange = Globals.ThisAddIn.Application.Selection.Range;
+
+            return currentRange.Words.Count == 1;
+        }
+
+        public void AddCrutchWord(Office.IRibbonControl control)
+        {
+            var currentRange = Globals.ThisAddIn.Application.Selection.Range;
+
+            var wordRange = currentRange.Words.First;
+
+            var word = wordRange.Text.Trim().ToLower(CultureInfo.CurrentCulture);
+
+            if (word.Any(c => Char.IsLetter(c)))
+            {
+                RaiseAddCrutch(word);
+            }
         }
 
         #endregion

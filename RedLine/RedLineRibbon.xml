@@ -18,5 +18,15 @@
       </tab>
     </tabs>
   </ribbon>
+
+  <contextMenus>
+    <contextMenu idMso="ContextMenuText">
+      <button id="AddCrutchWordButton"
+              label="Add Crutch Word"
+              insertBeforeMso="HyperlinkInsert"
+              onAction="AddCrutchWord"
+              getEnabled="CanAddCrutchWord"/>
+    </contextMenu>
+  </contextMenus>
 </customUI>
 
