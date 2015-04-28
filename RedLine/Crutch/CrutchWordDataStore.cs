@@ -58,7 +58,13 @@ namespace RedLine.Crutch
         {
             var doc = _serializer.Serialize(list);
 
-            using (var writer = XmlWriter.Create(FileSystem.CreateFile(list.Name + ".crutch")))
+            var settings = new XmlWriterSettings()
+            {
+                Indent = true,
+                IndentChars = "\t"
+            };
+            using (var stream = FileSystem.CreateFile(list.Name + ".crutch"))
+            using (var writer = XmlWriter.Create(stream, settings))
             {
                 doc.WriteTo(writer);
             }

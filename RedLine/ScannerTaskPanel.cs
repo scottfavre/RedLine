@@ -68,5 +68,16 @@ namespace RedLine
             btnNext.Enabled = results.CanMoveNext;
             btnPrev.Enabled = results.CanMovePrev;
         }
+
+        private void btnRemoveCrutch_Click(object sender, EventArgs e)
+        {
+            if (lbCrutches.SelectedIndex < 0) return;
+
+            var word = lbCrutches.Items[lbCrutches.SelectedIndex] as string;
+
+            if (word == null) return;
+
+            CrutchService.RemoveWord(word);
+        }
     }
 }
