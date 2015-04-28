@@ -5,7 +5,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace RedLine
+namespace RedLine.View
 {
     public partial class ScannerTaskPanel : UserControl, IPartImportsSatisfiedNotification
     {

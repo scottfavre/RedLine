@@ -177,7 +177,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ScannerTaskPanel.resx">
+    <EmbeddedResource Include="View\ScannerTaskPanel.resx">
       <DependentUpon>ScannerTaskPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Crutch\CrutchList_1_0.xsd">
@@ -191,16 +191,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RedLineRibbon.cs" />
+    <Compile Include="View\RedLineRibbon.cs" />
     <Compile Include="Scanners\AdverbScanner.cs" />
     <Compile Include="Scanners\CrutchScanner.cs" />
     <Compile Include="Scanners\IScanner.cs" />
     <Compile Include="Scanners\ScannerService.cs" />
     <Compile Include="Scanners\ScanResults.cs" />
-    <Compile Include="ScannerTaskPanel.cs">
+    <Compile Include="View\ScannerTaskPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ScannerTaskPanel.Designer.cs">
+    <Compile Include="View\ScannerTaskPanel.Designer.cs">
       <DependentUpon>ScannerTaskPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="ThisAddIn.cs">
@@ -216,7 +216,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="RedLineRibbon.xml" />
+    <EmbeddedResource Include="View\RedLineRibbon.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\search.png" />

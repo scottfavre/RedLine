@@ -31,7 +31,7 @@ using Office = Microsoft.Office.Core;
 // For more information, see the Ribbon XML documentation in the Visual Studio Tools for Office Help.
 
 
-namespace RedLine
+namespace RedLine.View
 {
     [ComVisible(true)]
     public class RedLineRibbon : Office.IRibbonExtensibility, IPartImportsSatisfiedNotification
@@ -70,7 +70,7 @@ namespace RedLine
 
         public string GetCustomUI(string ribbonID)
         {
-            return GetResourceText("RedLine.RedLineRibbon.xml");
+            return GetResourceText("RedLine.View.RedLineRibbon.xml");
         }
 
         #endregion

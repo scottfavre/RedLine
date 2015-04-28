@@ -1,6 +1,7 @@
 ﻿using Microsoft.Office.Tools;
 using RedLine.Crutch;
 using RedLine.Scanners;
+using RedLine.View;
 using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;

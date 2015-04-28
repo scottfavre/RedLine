@@ -1,4 +1,4 @@
-﻿namespace RedLine
+﻿namespace RedLine.View
 {
     partial class ScannerTaskPanel
     {
