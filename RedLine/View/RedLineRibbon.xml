@@ -21,7 +21,23 @@
 
   <contextMenus>
     <contextMenu idMso="ContextMenuText">
-      <button id="AddCrutchWordButton"
+      <button id="AddCrutchWordButtonText"
+              label="Add Crutch Word"
+              insertBeforeMso="HyperlinkInsert"
+              onAction="AddCrutchWord"
+              getEnabled="CanAddCrutchWord"/>
+    </contextMenu>
+  
+    <contextMenu idMso="ContextMenuComment">
+      <button id="AddCrutchWordButtonComment"
+              label="Add Crutch Word"
+              insertBeforeMso="HyperlinkInsert"
+              onAction="AddCrutchWord"
+              getEnabled="CanAddCrutchWord"/>
+    </contextMenu>
+  
+    <contextMenu idMso="ContextMenuRevision">
+      <button id="AddCrutchWordButtonRevision"
               label="Add Crutch Word"
               insertBeforeMso="HyperlinkInsert"
               onAction="AddCrutchWord"
