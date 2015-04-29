@@ -25,6 +25,7 @@
               label="Add Crutch Word"
               insertBeforeMso="HyperlinkInsert"
               onAction="AddCrutchWord"
+              getImage="GetMenuItemImage"
               getEnabled="CanAddCrutchWord"/>
     </contextMenu>
   
@@ -33,6 +34,7 @@
               label="Add Crutch Word"
               insertBeforeMso="HyperlinkInsert"
               onAction="AddCrutchWord"
+              getImage="GetMenuItemImage"
               getEnabled="CanAddCrutchWord"/>
     </contextMenu>
   
@@ -41,6 +43,7 @@
               label="Add Crutch Word"
               insertBeforeMso="HyperlinkInsert"
               onAction="AddCrutchWord"
+              getImage="GetMenuItemImage"
               getEnabled="CanAddCrutchWord"/>
     </contextMenu>
   </contextMenus>

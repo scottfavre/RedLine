@@ -63,6 +63,16 @@ namespace RedLine.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap crutch_word {
+            get {
+                object obj = ResourceManager.GetObject("crutch_word", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap search {
             get {
                 object obj = ResourceManager.GetObject("search", resourceCulture);

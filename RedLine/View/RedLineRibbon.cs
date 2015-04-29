@@ -103,6 +103,10 @@ namespace RedLine.View
             PanelVisibility.ScannerPanel = isChecked;
         }
 
+        public Bitmap GetMenuItemImage(Office.IRibbonControl control)
+        {
+            return Properties.Resources.crutch_word;
+        }
 
         public bool CanAddCrutchWord(Office.IRibbonControl control)
         {

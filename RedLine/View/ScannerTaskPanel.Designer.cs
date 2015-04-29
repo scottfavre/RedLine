@@ -36,6 +36,8 @@
             this.btnRemoveCrutch = new System.Windows.Forms.Button();
             this.labelCurrentList = new System.Windows.Forms.Label();
             this.btnManageLists = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // clbScanners
@@ -86,7 +88,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 137);
+            this.label1.Location = new System.Drawing.Point(16, 138);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 4;
@@ -106,7 +108,7 @@
             // labelCurrentList
             // 
             this.labelCurrentList.AutoSize = true;
-            this.labelCurrentList.Location = new System.Drawing.Point(61, 137);
+            this.labelCurrentList.Location = new System.Drawing.Point(74, 138);
             this.labelCurrentList.Name = "labelCurrentList";
             this.labelCurrentList.Size = new System.Drawing.Size(35, 13);
             this.labelCurrentList.TabIndex = 6;
@@ -123,10 +125,22 @@
             this.btnManageLists.UseVisualStyleBackColor = true;
             this.btnManageLists.Click += new System.EventHandler(this.btnManageLists_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::RedLine.Properties.Resources.crutch_word;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 137);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
             // ScannerTaskPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnManageLists);
             this.Controls.Add(this.labelCurrentList);
             this.Controls.Add(this.btnRemoveCrutch);
@@ -137,6 +151,7 @@
             this.Controls.Add(this.clbScanners);
             this.Name = "ScannerTaskPanel";
             this.Size = new System.Drawing.Size(231, 297);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,5 +167,6 @@
         private System.Windows.Forms.Button btnRemoveCrutch;
         private System.Windows.Forms.Label labelCurrentList;
         private System.Windows.Forms.Button btnManageLists;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
