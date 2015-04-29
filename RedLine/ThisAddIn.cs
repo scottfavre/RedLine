@@ -86,6 +86,7 @@ namespace RedLine
 
             _scannerContainer = CustomTaskPanes.Add(_scannerPanel, "RedLine");
             _scannerContainer.Visible = visible;
+            _scannerContainer.VisibleChanged += OnScannerContainer_VisibleChanged;
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -105,6 +106,11 @@ namespace RedLine
         }
         
         #endregion
+
+        void OnScannerContainer_VisibleChanged(object sender, EventArgs e)
+        {
+            RaiseVisiblityChanged();
+        }
 
         public bool ScannerPanel
         {
