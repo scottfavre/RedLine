@@ -7,18 +7,20 @@ namespace RedLine.View
 {
     public partial class ManageCrutchListsDialog : Form
     {
-        private string[] _names;
+        private List<string> _names;
+        private HashSet<string> _deletedLists;
 
         public ManageCrutchListsDialog()
         {
             InitializeComponent();
+            _deletedLists = new HashSet<string>();
         }
 
         public void SetLists(string current, IEnumerable<string> listNames)
         {
-            _names = listNames.OrderBy(name => name).ToArray();
+            _names = listNames.OrderBy(name => name).ToList();
             lbCrutchLists.Items.Clear();
-            lbCrutchLists.Items.AddRange(_names);
+            lbCrutchLists.Items.AddRange(_names.ToArray());
 
             if(lbCrutchLists.Items.Count > 0 && current != null)
             {
@@ -35,6 +37,7 @@ namespace RedLine.View
 
         public string SelectedList { get; private set; }
         public bool CreateNew { get; private set; }
+        public IEnumerable<string> DeletedLists { get { return _deletedLists; } }
 
         private void tbNewTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -93,6 +96,38 @@ namespace RedLine.View
                 if (rect.Contains(e.Location))
                 {
                     btnSelect.PerformClick();
+                }
+            }
+        }
+        
+        private void lbCrutchLists_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete && lbCrutchLists.SelectedIndex >= 0)
+            {
+                var selectedName = lbCrutchLists.SelectedItem as string;
+
+                var res = MessageBox.Show(
+                    "Delete crutch list \"" + selectedName + "\"?",
+                    "Delete Crutch List",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2);
+
+                if (res == System.Windows.Forms.DialogResult.Yes)
+                {
+                    _deletedLists.Add(selectedName);
+                    _names.Remove(selectedName);
+                    var idx = lbCrutchLists.SelectedIndex;
+                    lbCrutchLists.Items.RemoveAt(lbCrutchLists.SelectedIndex);
+
+                    if (idx > lbCrutchLists.Items.Count - 1)
+                    {
+                        lbCrutchLists.SelectedIndex = lbCrutchLists.Items.Count - 1;
+                    }
+                    else
+                    {
+                        lbCrutchLists.SelectedIndex = idx;
+                    }
                 }
             }
         }

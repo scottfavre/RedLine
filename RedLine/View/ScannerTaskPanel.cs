@@ -119,6 +119,11 @@ namespace RedLine.View
                     CrutchService.SetCrutchList(form.SelectedList);
                 }
             }
+
+            foreach(var deleted in form.DeletedLists)
+            {
+                CrutchService.DeleteCrutchList(deleted);
+            }
         }
     }
 }

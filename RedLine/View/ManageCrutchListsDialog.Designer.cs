@@ -43,6 +43,7 @@
             this.lbCrutchLists.Name = "lbCrutchLists";
             this.lbCrutchLists.Size = new System.Drawing.Size(260, 277);
             this.lbCrutchLists.TabIndex = 0;
+            this.lbCrutchLists.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lbCrutchLists_KeyDown);
             this.lbCrutchLists.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbCrutchLists_DoubleClick);
             // 
             // tbNewTextBox
