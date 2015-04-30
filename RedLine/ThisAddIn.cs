@@ -33,6 +33,9 @@ namespace RedLine
         [Import]
         public ICrutchWordService CrutchService { private get; set; }
 
+        [Import]
+        public ISettingsService Settings { private get; set; }
+
         protected override Office.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             _ribbon = new RedLineRibbon();
@@ -74,12 +77,9 @@ namespace RedLine
 
         private void CreateScannerPanel()
         {
-            bool visible = false;
-
-            if(_scannerContainer != null)
-            {
-                visible = _scannerContainer.Visible;
-            }
+            bool visible = _scannerContainer == null
+                ? Settings.PanelVisible
+                : _scannerContainer.Visible;
 
             _scannerPanel = new ScannerTaskPanel();
             _container.ComposeParts(_scannerPanel);
@@ -122,6 +122,7 @@ namespace RedLine
             {
                 if (_scannerContainer.Visible != value)
                 {
+                    Settings.PanelVisible = value;
                     _scannerContainer.Visible = value;
                     RaiseVisiblityChanged();
                 }

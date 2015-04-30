@@ -7,9 +7,11 @@ namespace RedLine.Scanners
     [Export(typeof(IScanner))]
     public class AdverbScanner: IScanner
     {
+        [Import]
+        public ISettingsService Settings { private get; set; }
+
         public AdverbScanner()
         {
-            Enabled = true;
         }
 
         public string Name
@@ -22,7 +24,11 @@ namespace RedLine.Scanners
             get { yield return "ly"; }
         }
 
-        public bool Enabled { get; set; }
+        public bool Enabled 
+        {
+            get { return Settings.AdverbScannerEnabled; }
+            set { Settings.AdverbScannerEnabled = value; }
+        }
 
         public void InitFinder(Find find)
         {

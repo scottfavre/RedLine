@@ -34,5 +34,41 @@ namespace RedLine.Properties {
                 this["LastCrutchList"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PanelVisible {
+            get {
+                return ((bool)(this["PanelVisible"]));
+            }
+            set {
+                this["PanelVisible"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AdverbScannerEnabled {
+            get {
+                return ((bool)(this["AdverbScannerEnabled"]));
+            }
+            set {
+                this["AdverbScannerEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CrutchScannerEnabled {
+            get {
+                return ((bool)(this["CrutchScannerEnabled"]));
+            }
+            set {
+                this["CrutchScannerEnabled"] = value;
+            }
+        }
     }
 }

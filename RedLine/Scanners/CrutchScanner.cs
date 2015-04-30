@@ -10,9 +10,11 @@ namespace RedLine.Scanners
         [Import]
         public ICrutchWordService CrutchService { private get; set; }
 
+        [Import]
+        public ISettingsService Settings { private get; set; }
+
         public CrutchScanner()
         {
-            Enabled = true;
         }
 
         public string Name
@@ -25,7 +27,11 @@ namespace RedLine.Scanners
             get { return CrutchService.CrutchWords; }
         }
 
-        public bool Enabled { get; set; }
+        public bool Enabled
+        {
+            get { return Settings.CrutchScannerEnabled; }
+            set { Settings.CrutchScannerEnabled = value; }
+        }
 
         public void InitFinder(Microsoft.Office.Interop.Word.Find find)
         {
