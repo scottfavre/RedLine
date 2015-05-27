@@ -29,7 +29,7 @@ namespace RedLine.View
 
             LoadCrutchWords();
 
-            _scanners = ScannerService.Scanners.ToArray();
+            _scanners = ScannerService.Scanners.OrderBy(s => s.Name).ToArray();
 
             for (int idx = 0; idx < _scanners.Length; idx++)
             {
