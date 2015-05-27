@@ -15,6 +15,7 @@ namespace RedLine
         Stream ReadFile(string filePath);
         void DeleteFile(string filePath);
         IEnumerable<string> ListFiles(string pattern, string location = null);
+        bool FileExists(string filePath);
     }
 
     [Export(typeof(IFileSystemService))]
@@ -69,6 +70,13 @@ namespace RedLine
                 return Directory.EnumerateFiles(location, pattern);
             else
                 return Enumerable.Empty<string>();
+        }
+
+        public bool FileExists(string filePath)
+        {
+            filePath = MakeAbsolutePath(filePath);
+
+            return File.Exists(filePath);
         }
 
         private string MakeAbsolutePath(string filePath)

@@ -70,5 +70,17 @@ namespace RedLine.Properties {
                 this["CrutchScannerEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HomonymScannerEnabled {
+            get {
+                return ((bool)(this["HomonymScannerEnabled"]));
+            }
+            set {
+                this["HomonymScannerEnabled"] = value;
+            }
+        }
     }
 }

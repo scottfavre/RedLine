@@ -9,6 +9,7 @@ namespace RedLine
 
         bool AdverbScannerEnabled { get; set; }
         bool CrutchScannerEnabled { get; set; }
+        bool HomonymScannerEnabled { get; set; }
     }
 
     [Export(typeof(ISettingsService))]
@@ -60,6 +61,19 @@ namespace RedLine
             set
             {
                 Properties.Settings.Default.CrutchScannerEnabled = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public bool HomonymScannerEnabled 
+        {
+            get
+            {
+                return Properties.Settings.Default.HomonymScannerEnabled;
+            }
+            set
+            {
+                Properties.Settings.Default.HomonymScannerEnabled = value;
                 Properties.Settings.Default.Save();
             }
         }
