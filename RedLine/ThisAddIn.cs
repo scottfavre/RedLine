@@ -77,6 +77,13 @@ namespace RedLine
 
         private void CreateScannerPanel()
         {
+            if (_scannerContainer != null && _scannerPanel != null)
+            {
+                CustomTaskPanes.Remove(_scannerContainer);
+                _scannerPanel = null;
+                _scannerContainer = null;
+            }
+
             bool visible = _scannerContainer == null
                 ? Settings.PanelVisible
                 : _scannerContainer.Visible;
