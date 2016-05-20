@@ -6,23 +6,22 @@ namespace RedLine.Histogram
 	{
 		public Histogram()
 		{
-			Buckets = new Dictionary<string, int>();
-			Exclusions = new HashSet<string>();
+			Series = new List<Series>();
 		}
 
-		public void Exclude(params string[] exclusions)
+		public List<Series> Series{ get; set; }
+	}
+
+	public class Series
+	{
+		public Series()
 		{
-			foreach (var exclusion in exclusions)
-			{
-				Exclusions.Add(exclusion.ToLowerInvariant());
-			}
+			Buckets = new Dictionary<string, int>();
 		}
 
 		public void Add(string word)
 		{
 			var key = word.ToLowerInvariant();
-
-			if (Exclusions.Contains(key)) return;
 
 			if (Buckets.ContainsKey(key))
 			{
@@ -34,7 +33,19 @@ namespace RedLine.Histogram
 			}
 		}
 
-		public Dictionary<string, int> Buckets { get; }
-		public HashSet<string> Exclusions { get; }
+		public int this[string word]
+		{
+			get
+			{
+				int count;
+
+				Buckets.TryGetValue(word, out count);
+
+				return count;
+			}
+		}
+
+		public string Name { get; set; }
+		public Dictionary<string, int> Buckets { get; set; }
 	}
 }
