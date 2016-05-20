@@ -21,7 +21,9 @@ namespace RedLine.Histogram
 		{
 			var text = document.Content.Text;
 
-			var regex = new Regex(@"\b\w+\b", RegexOptions.Compiled);
+			text = text.Replace('’', '\'');
+
+			var regex = new Regex(@"\b[\w']+", RegexOptions.Compiled);
 
 			var matches = regex.Matches(text);
 			
