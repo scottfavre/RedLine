@@ -203,6 +203,8 @@
     <Compile Include="Crutch\CrutchWordService.cs" />
     <Compile Include="EventArgs.cs" />
     <Compile Include="FileSystemService.cs" />
+    <Compile Include="Histogram\Histogram.cs" />
+    <Compile Include="Histogram\HistogramService.cs" />
     <Compile Include="Homonym\HomonymService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

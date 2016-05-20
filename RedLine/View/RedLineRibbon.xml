@@ -15,6 +15,13 @@
                     getPressed="GetShowPanelChecked"
                     onAction="ShowPanelChecked"/>
         </group>
+        <group id="grpStats"
+               label="Stats">
+          <button id="btnHistogram"
+                  label="Histogram"
+                  onAction="OnHistogramClicked"
+                  size="large"/>
+        </group>
       </tab>
     </tabs>
   </ribbon>
